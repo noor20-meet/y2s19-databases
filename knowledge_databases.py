@@ -14,24 +14,24 @@ def add_article(link, name, topic, rating):
 	session.commit()
 
 
-add_article("url","Name","Topic",7)
-dolphins = add_article(link = "https://en.wikipedia.org/wiki/Dolphin", name = "Dolphins", 
-						topic = "Learn more",
-						# rating = 8)
-# ants = add_article(link = "https://en.wikipedia.org/wiki/Ant", name = "Ants", 
-					# topic = "Ants ", rating = 7)
+
+# add_article("https://en.wikipedia.org/wiki/Dolphin", "Dolphins", "Learn more  about these gentle aquatic mammals and their living environment. How do they live? How do they communicate?",10)
+# add_article("https://en.wikipedia.org/wiki/Ant", "Ants", "Ants are extremely hardworking insects that can carry many times its own body weight. How strong!", 8)
+
 
 def query_all_articles():
 	articles = session.query(Knowledge).all()
 	return articles
 
-print(query_all_articles())
+# print(query_all_articles())
 
-def query_article_by_topic(topic):
-	topics = session.query(Knowledge).filter_by(Topic = topic).first()
-	return topics
+def query_article_by_name(name_first):
+	name_first = session.query(Knowledge).filter_by(Name = name_first).first()
+	return name_first
 
-def delete_article_by_topic():
+
+
+def delete_article_by_topic(topic):
 	topics_deleted = session.query(Knowledge).filter_by(Topic = topic).delete()
 	return topics_deleted
 
@@ -39,6 +39,11 @@ def delete_all_articles():
 	articles_deleted = session.query(Knowledge).delete()
 	return articles_deleted
 
-def edit_article_rating(name, new_rating):
-	name.Rating(new_rating)
 
+def edit_article_rating(name, new_rating):
+	name = session.query(Knowledge).filter_by(Name=name).first()
+
+	name.Rating = new_rating
+	session.commit()
+
+print(query_all_articles())

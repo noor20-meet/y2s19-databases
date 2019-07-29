@@ -21,5 +21,8 @@ class Knowledge(Base):
 
 
 	def __repr__(self):
-		return("Article name : {}").format(self.Name)
+		return("Link : {}\n"
+			"Name: {}\n"
+			"Topic: {}\n"
+			"Rating: {}").format(self.Link, self.Name, self.Topic, self.Rating)
 
